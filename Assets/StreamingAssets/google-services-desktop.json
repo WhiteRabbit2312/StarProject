@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "236069206251",
+    "firebase_url": "https://star-project-31d48-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "star-project-31d48",
+    "storage_bucket": "star-project-31d48.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236069206251:android:582e5635d700c321e4a6ae",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.StarProject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQkTL4vOyscpGh7k1YNBPVMAJAKtBf-rU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
