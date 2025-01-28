@@ -27,11 +27,11 @@ namespace StarProject
             }
         }
 
-        private async Task Login(string email, string password)
+        public async Task LoginUserAsync(string login, string password)
         {
             try
             {
-                AuthResult result = await _auth.SignInWithEmailAndPasswordAsync(email, password);
+                AuthResult result = await _auth.SignInWithEmailAndPasswordAsync(login, password);
 
             }
             catch (FirebaseException ex)

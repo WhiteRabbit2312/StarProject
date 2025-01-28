@@ -3,7 +3,7 @@ using TMPro;
 
 namespace StarProject
 {
-    public class InputRegistratonData : MonoBehaviour
+    public class InputAuthorizationData : MonoBehaviour
     {
         [SerializeField] private TMP_InputField _login;
         [SerializeField] private TMP_InputField _password;
