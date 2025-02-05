@@ -10,5 +10,7 @@ namespace StarProject
                                            + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
         
         public const int MinPasswordLength = 6;
+        public const string DatabaseUserKey = "DatabaseUser";
+        public const string DatabaseUserNameKey = "name";
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace StarProject
@@ -29,8 +30,12 @@ namespace StarProject
                 }
 
             });
-
-
+            LoadMenuScene();
+        }
+        
+        private void LoadMenuScene()
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }

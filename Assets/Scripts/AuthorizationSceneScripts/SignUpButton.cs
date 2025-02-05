@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace StarProject
 {
@@ -31,12 +32,17 @@ namespace StarProject
                     }
 
                 });
-                
+                LoadMenuScene();
             }
             else
             {
                 Debug.LogError("Checking sign up failed");
             }
+        }
+
+        private void LoadMenuScene()
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }
