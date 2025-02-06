@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 namespace StarProject
 {
@@ -13,6 +11,7 @@ namespace StarProject
     public class AuthorizationButton : MonoBehaviour,IAuthorizationButton
     {
         [SerializeField] protected InputAuthorizationData _inputData;
+        [SerializeField] protected SceneIndexSO SceneIndex;
         protected CheckAuthorization _checkAuthorization;
         protected Authorization _authorization;
         private Button _button;
@@ -32,6 +31,11 @@ namespace StarProject
         public virtual void AuthorizationButtonClicked()
         {
             
+        }
+        
+        protected void LoadMenuScene()
+        {
+            SceneManager.LoadSceneAsync(SceneIndex.LoadingSceneIdx);
         }
     }
 }

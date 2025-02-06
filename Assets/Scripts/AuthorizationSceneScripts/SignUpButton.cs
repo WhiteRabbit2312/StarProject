@@ -8,6 +8,7 @@ namespace StarProject
         public override void AuthorizationButtonClicked()
         {
             SignUpButtonPressed();
+            LoadMenuScene();
         }
         
         private async void SignUpButtonPressed()
@@ -32,17 +33,12 @@ namespace StarProject
                     }
 
                 });
-                LoadMenuScene();
+                
             }
             else
             {
                 Debug.LogError("Checking sign up failed");
             }
-        }
-
-        private void LoadMenuScene()
-        {
-            SceneManager.LoadScene(1);
         }
     }
 }

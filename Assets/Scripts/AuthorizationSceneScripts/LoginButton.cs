@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace StarProject
 {
@@ -9,6 +8,7 @@ namespace StarProject
         public override void AuthorizationButtonClicked()
         {
             LoginButtonPressed();
+            LoadMenuScene();
         }
 
         private async void LoginButtonPressed()
@@ -28,14 +28,7 @@ namespace StarProject
                 {
                     Debug.Log("CreateUserWithEmailAndPasswordAsync completed successfully.");
                 }
-
             });
-            LoadMenuScene();
-        }
-        
-        private void LoadMenuScene()
-        {
-            SceneManager.LoadScene(1);
         }
     }
 }

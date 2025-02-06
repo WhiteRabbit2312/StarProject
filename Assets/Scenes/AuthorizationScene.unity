@@ -2483,6 +2483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputData: {fileID: 326750461}
+  SceneIndex: {fileID: 11400000, guid: 102c9735235c355458a45cce07855645, type: 2}
 --- !u!1 &1144894960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,6 +2814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputData: {fileID: 1527780659}
+  SceneIndex: {fileID: 11400000, guid: 102c9735235c355458a45cce07855645, type: 2}
 --- !u!1 &1360688879
 GameObject:
   m_ObjectHideFlags: 0
