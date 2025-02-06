@@ -9,7 +9,7 @@ namespace StarProject
     {
         private DatabaseReference _databaseRef;
         private FirebaseUser _firebaseUser;
-
+        public FirebaseUser FirebaseUser { get => _firebaseUser; }
         public Database()
         {
             _databaseRef = FirebaseDatabase.DefaultInstance.RootReference;

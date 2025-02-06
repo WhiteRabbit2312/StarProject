@@ -8,6 +8,7 @@ namespace StarProject
     {
         [SerializeField] private SceneIndexSO _sceneIndex;
         private NetworkRunner _networkRunner;
+        public NetworkRunner NetworkRunner{ get { return _networkRunner; }  }
         
         public async void StartGame(GameMode mode, string sessionName)
         {
