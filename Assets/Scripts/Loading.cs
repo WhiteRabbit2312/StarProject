@@ -21,7 +21,6 @@ namespace StarProject
         private async void Awake()
         {
             _playButton.onClick.AddListener(GoToNextLevel);
-            //StartCoroutine(loadNextLevel(""));
             await LoadNextLevelAsync("MainMenuScene");
         }
 
@@ -42,25 +41,7 @@ namespace StarProject
 
             Debug.Log($"Loaded Level {level}");
         }
-
-        private IEnumerator loadNextLevel(string level)
-        {
-            _sceneOperation = SceneManager.LoadSceneAsync(level);
-            _sceneOperation.allowSceneActivation = false;
-
-            while (!_sceneOperation.isDone)
-            {
-                _loadingSlider.value = _sceneOperation.progress;
-
-                if (_sceneOperation.progress >= 0.9f && !_playButton.gameObject.activeInHierarchy)
-                    _playButton.gameObject.SetActive(true);
-
-                yield return null;
-            }
-
-            Debug.Log($"Loaded Level {level}");
-        }
-
+        
         // Function to handle which level is loaded next
         public void GoToNextLevel()
         {
