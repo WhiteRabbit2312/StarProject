@@ -11,7 +11,8 @@ namespace StarProject
         
         public const int MinPasswordLength = 6;
         public const string DatabaseUserKey = "DatabaseUser";
-        public const string DatabaseUserNameKey = "name";
+        public const string DatabaseUserNameKey = "Name";
+        public const string DatabaseUserAvatarKey = "Avatar";
         public const string LobbyName = "Loby";
         public const string SessionName = "SessionName";
     }

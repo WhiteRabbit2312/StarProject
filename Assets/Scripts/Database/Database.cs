@@ -42,6 +42,25 @@ namespace StarProject
                 return null;
             }
         }
+        
+        public async Task<string> GetPlayerData(string key, string userId)
+        {
+            var snapshot = await _databaseRef
+                .Child(Constants.DatabaseUserKey)
+                .Child(userId)
+                .Child(key)
+                .GetValueAsync();
+
+            if (snapshot.Exists)
+            {
+                string data = snapshot.Value.ToString();
+                return data;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
 
