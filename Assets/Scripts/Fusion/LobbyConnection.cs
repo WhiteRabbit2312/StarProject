@@ -4,8 +4,10 @@ using Fusion;
 using UnityEngine;
 using Zenject;
 using System;
+using System.Collections;
 using TMPro;
 using UniRx;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace StarProject
@@ -17,9 +19,7 @@ namespace StarProject
         private IDisposable _countdownSubscription;
 
         [SerializeField] private PlayerInformationPanel _playerInformationPanel;
-
-        [SerializeField] private Image[] _image;
-        [SerializeField] private TMP_Text[] _text;
+        
         [Networked] private NetworkDictionary<PlayerRef, NetworkString<_32>> _playerUserID => default;
         private GameStarter _gameStarter;
         private Database _database;
@@ -53,24 +53,6 @@ namespace StarProject
             PlayerRef playerRef1 = player.FirstOrDefault();
             _playerUserID.Set(playerRef1, _database.FirebaseUser.UserId);
         }
-        
-        public void RPC_StartCountdown()
-        {
-            CountdownTimer = _startTime;
-            Observable
-                .Interval(TimeSpan.FromSeconds(1))
-                .TakeWhile(_ => CountdownTimer > 0)
-                .Subscribe(_ =>
-                {
-                    CountdownTimer -= 1;
-                    Debug.Log($"time left: {CountdownTimer}");
-                }, () =>
-                {
-                    Debug.Log("Time is up!");
-                    //RPC_InitPlayerCells();
-                })
-                .AddTo(this);
-        }
 
         private async void ShowPlayerInformPanel()
         {
@@ -81,6 +63,20 @@ namespace StarProject
 
                 _playerInformationPanel.RPC_InitPlayerPanel(name, avatarID);
             }
+            StartCoroutine(LoadSceneCoroutine());
+        }
+        
+        private IEnumerator LoadSceneCoroutine()
+        {
+            yield return new WaitForSeconds(3f);
+            RPC_LoadGameplayScene();
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        private void RPC_LoadGameplayScene()
+        {
+            SceneRef scene = SceneRef.FromIndex(4);
+            _gameStarter.NetworkRunner.LoadScene(scene);
         }
         
         /*

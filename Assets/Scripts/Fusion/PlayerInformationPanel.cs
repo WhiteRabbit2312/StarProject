@@ -13,13 +13,7 @@ namespace StarProject
     {
         [SerializeField] private PlayerCell _playerCellPrefab;
         [SerializeField] private Transform _playerCellContainer;
-        private Database _database;
         [SerializeField] private AvatarSpriteSO _avatarSpriteSO;
-        
-        public void Construct(Database database)
-        {
-            _database = database;
-        }
         
         [Rpc(RpcSources.All, RpcTargets.All)]
         public void RPC_InitPlayerPanel(string nick, string avatarID)
