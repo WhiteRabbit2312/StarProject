@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace StarProject
 {
@@ -13,10 +12,10 @@ namespace StarProject
         
         private async void SignUpButtonPressed()
         {
-            if (_checkAuthorization.ValidateRegistration(_inputData.Login.text, 
-                    _inputData.Password.text, _inputData.ConfirmPassword.text))
+            if (CheckAuth.ValidateRegistration(InputData.Login.text, 
+                    InputData.Password.text, InputData.ConfirmPassword.text))
             {
-                await _authorization.RegistrateUserAsync(_inputData.Login.text, _inputData.Password.text).ContinueWith(task =>
+                await Auth.RegistrateUserAsync(InputData.Login.text, InputData.Password.text).ContinueWith(task =>
                 {
                     if (task.IsCanceled)
                     {

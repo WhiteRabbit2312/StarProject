@@ -15,5 +15,6 @@ namespace StarProject
         public const string DatabaseUserAvatarKey = "Avatar";
         public const string LobbyName = "Loby";
         public const string SessionName = "SessionName";
+        public const int TestPlayersCount = 2;
     }
 }

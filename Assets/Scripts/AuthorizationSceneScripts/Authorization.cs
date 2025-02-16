@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Threading.Tasks;
 using Firebase;
 using UnityEngine;
@@ -14,7 +12,6 @@ namespace StarProject
         public Authorization()
         {
             _auth = FirebaseAuth.DefaultInstance;
-            Debug.Log("_auth " + _auth);
         }
         
         public async Task RegistrateUserAsync(string login, string password)

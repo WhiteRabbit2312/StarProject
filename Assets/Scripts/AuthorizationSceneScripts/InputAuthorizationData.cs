@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using TMPro;
 
@@ -16,7 +15,11 @@ namespace StarProject
 
         private void Awake()
         {
+#if UNITY_EDITOR
             _login.text = "login@gmail.com";
+#else
+            _login.text = "login3@gmail.com";
+#endif
             _password.text = "123123";
         }
     }

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEngine;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace StarProject
 {

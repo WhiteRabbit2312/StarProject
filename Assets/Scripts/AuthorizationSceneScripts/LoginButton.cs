@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace StarProject
 {
@@ -13,7 +12,7 @@ namespace StarProject
 
         private async void LoginButtonPressed()
         {
-            await _authorization.LoginUserAsync(_inputData.Login.text, _inputData.Password.text).ContinueWith(task =>
+            await Auth.LoginUserAsync(InputData.Login.text, InputData.Password.text).ContinueWith(task =>
             {
                 if (task.IsCanceled)
                 {

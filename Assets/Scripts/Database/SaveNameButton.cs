@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -30,15 +29,10 @@ namespace StarProject
 
         private void SaveButtonClicked()
         {
-            if(_database == null)
-                Debug.LogError("database is null");
-            
-            
             _database.SetUserData(Constants.DatabaseUserNameKey, _nameInputField.text);
             _database.SetUserData(Constants.DatabaseUserAvatarKey, 0);
             _visualiseUserName.GetUserName();
             _nameCanvas.SetActive(false);
-            Debug.LogError("Pressed button");
         }
     }
 }

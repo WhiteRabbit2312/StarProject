@@ -16,5 +16,5 @@ MonoBehaviour:
   LoadingSceneIdx: 1
   MainMenuSceneIdx: 2
   LobbySceneIdx: 3
-  EditCharacterSceneIdx: 4
-  GameplaySceneIdx: 5
+  EditCharacterSceneIdx: 5
+  GameplaySceneIdx: 4

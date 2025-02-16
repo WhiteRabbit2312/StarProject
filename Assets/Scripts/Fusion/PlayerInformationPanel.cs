@@ -1,11 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using Fusion;
 using UnityEngine;
-using Zenject;
-using System;
-using UniRx;
-
 
 namespace StarProject
 {
@@ -19,11 +13,9 @@ namespace StarProject
         public void RPC_InitPlayerPanel(string nick, string avatarID)
         {
             gameObject.SetActive(true);
-            Debug.LogWarning("RPC_InitPlayerPanel");
             if (int.TryParse(avatarID, out int id))
             {
                 PlayerCell playerCell = Instantiate(_playerCellPrefab, _playerCellContainer);
-                Debug.LogWarning("playerCell: " + playerCell);
  
                 playerCell.AvatarImage.sprite = _avatarSpriteSO.AvatarSprites[id];
                 playerCell.NicknameText.text = nick;

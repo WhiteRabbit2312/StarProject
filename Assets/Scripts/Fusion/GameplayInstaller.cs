@@ -1,7 +1,5 @@
-using Fusion;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 
 namespace StarProject
 {

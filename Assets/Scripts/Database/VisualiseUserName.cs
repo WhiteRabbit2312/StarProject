@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -20,15 +19,8 @@ namespace StarProject
 
         public async void GetUserName()
         {
-            try
-            {
-                var userName = await _database.GetPlayerData(Constants.DatabaseUserNameKey);
-                _text.text = userName.ToString();
-            }
-            catch (Exception e)
-            {
-                throw; // TODO handle exception
-            }
+            var userName = await _database.GetPlayerData(Constants.DatabaseUserNameKey);
+            _text.text = userName;
         }
     }
 }

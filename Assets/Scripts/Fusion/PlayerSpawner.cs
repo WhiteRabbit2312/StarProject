@@ -1,4 +1,3 @@
-using System;
 using Fusion;
 using UnityEngine;
 using Zenject;
@@ -16,19 +15,11 @@ namespace StarProject
         [Inject]
         public void Construct(GameStarter gameStarter)
         {
-            Debug.LogError("Construct");
-
             _gameStarter = gameStarter;
-        }
-
-        private void Awake()
-        {
-            Debug.LogError("Awake");
         }
 
         public override void Spawned()
         {
-            Debug.LogError(" spawned");
             if (Runner.IsClient)
             {
                 var player = Runner.Spawn(_playerPrefab, _spawnPoint, Quaternion.identity, _gameStarter.NetworkRunner.LocalPlayer);
@@ -39,7 +30,6 @@ namespace StarProject
         [Rpc(RpcSources.All, RpcTargets.StateAuthority, InvokeLocal = true)]
         private void Rpc_AddPlayer(PlayerRef playerRef, NetworkObject networkObject)
         {
-            Debug.LogError("AddPlayer");
             Players.Add(playerRef, networkObject);
         }
     }

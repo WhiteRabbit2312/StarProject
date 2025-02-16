@@ -12,7 +12,6 @@ namespace StarProject
 
         public void LoadScene()
         {
-            // Загружаем сцену асинхронно
             Addressables.LoadSceneAsync(_sceneAddress, LoadSceneMode.Single).Completed += OnSceneLoaded;
         }
 
@@ -20,11 +19,11 @@ namespace StarProject
         {
             if (obj.Status == AsyncOperationStatus.Succeeded)
             {
-                Debug.Log("Сцена успешно загружена: " + _sceneAddress);
+                Debug.Log("Scene loaded: " + _sceneAddress);
             }
             else
             {
-                Debug.LogError("Ошибка загрузки сцены: " + obj.OperationException);
+                Debug.LogError("Error: " + obj.OperationException);
             }
         }
 
@@ -35,7 +34,7 @@ namespace StarProject
             {
                 if (handle.Status == AsyncOperationStatus.Succeeded)
                 {
-                    Debug.Log("Сцена успешно выгружена.");
+                    Debug.Log("Scene loaded.");
                 }
             };
         }

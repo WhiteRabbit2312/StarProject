@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -10,17 +8,17 @@ namespace StarProject
     [RequireComponent(typeof(Button))]
     public class AuthorizationButton : MonoBehaviour,IAuthorizationButton
     {
-        [SerializeField] protected InputAuthorizationData _inputData;
+        [SerializeField] protected InputAuthorizationData InputData;
         [SerializeField] protected SceneIndexSO SceneIndex;
-        protected CheckAuthorization _checkAuthorization;
-        protected Authorization _authorization;
+        protected CheckAuthorization CheckAuth;
+        protected Authorization Auth;
         private Button _button;
 
         [Inject]
         public void Construct(Authorization authorization, CheckAuthorization checkAuthorization)
         {
-            _authorization = authorization;
-            _checkAuthorization = checkAuthorization;
+            Auth = authorization;
+            CheckAuth = checkAuthorization;
         }
         private void Awake()
         {
