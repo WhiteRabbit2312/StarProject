@@ -23,6 +23,8 @@ namespace StarProject
             try
             {
                 var result = await _database.GetPlayerData(Constants.DatabaseUserNameKey, playerUserID);
+                
+                //string result = PlayerPrefs.GetString(Constants.DatabaseUserNameKey);
                 if (_connectedPlayerNames.Contains(result.ToString()))
                 {
                     return;

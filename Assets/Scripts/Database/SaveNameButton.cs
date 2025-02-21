@@ -30,6 +30,7 @@ namespace StarProject
         private void SaveButtonClicked()
         {
             _database.SetUserData(Constants.DatabaseUserNameKey, _nameInputField.text);
+            //PlayerPrefs.SetString(Constants.DatabaseUserNameKey, _nameInputField.text);
             _database.SetUserData(Constants.DatabaseUserAvatarKey, 0);
             _visualiseUserName.GetUserName();
             _nameCanvas.SetActive(false);

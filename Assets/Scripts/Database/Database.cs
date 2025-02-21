@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
@@ -9,11 +10,17 @@ namespace StarProject
     {
         private DatabaseReference _databaseRef;
         private FirebaseUser _firebaseUser;
-        public FirebaseUser FirebaseUser { get => _firebaseUser; }
+
+        public FirebaseUser FirebaseUser
+        {
+            get => _firebaseUser;
+        }
+
         public Database()
         {
             _databaseRef = FirebaseDatabase.DefaultInstance.RootReference;
             _firebaseUser = FirebaseAuth.DefaultInstance.CurrentUser;
+            FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
         }
 
         public void SetUserData<T>(string key, T data)
@@ -23,6 +30,7 @@ namespace StarProject
                 .Child(key)
                 .SetValueAsync(data);
         }
+
 /*
         public async Task<string> GetPlayerData(string key)
         {
@@ -45,21 +53,30 @@ namespace StarProject
         */
         public async Task<string> GetPlayerData(string key, string userId)
         {
-            var snapshot = await _databaseRef
-                .Child(Constants.DatabaseUserKey)
-                .Child(userId)
-                .Child(key)
-                .GetValueAsync();
+            try
+            {
+                var snapshot = await _databaseRef
+                    .Child(Constants.DatabaseUserKey)
+                    .Child(userId)
+                    .Child(key)
+                    .GetValueAsync();
 
-            if (snapshot.Exists)
-            {
-                string data = snapshot.Value.ToString();
-                return data;
+                if (snapshot.Exists)
+                {
+                    string data = snapshot.Value.ToString();
+                    return data;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return null;
+                Debug.LogError(e);
             }
+
+            return null;
         }
     }
 }

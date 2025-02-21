@@ -12,6 +12,7 @@ namespace StarProject
     {
         [SerializeField] private PlayerInformationPanel _playerInformationPanel;
         [SerializeField] private ConnectedPlayers _connectedPlayers;
+        [SerializeField] private PlayersInGameText _playersInGameText;
         [Networked] private NetworkDictionary<PlayerRef, NetworkString<_32>> _playerUserID => default;
         [SerializeField] private AvatarSpriteSO _avatarSpriteSO;
         [SerializeField] private SceneIndexSO _sceneIndexSO;
@@ -19,7 +20,7 @@ namespace StarProject
         
         private GameStarter _gameStarter;
         private Database _database;
-        
+
         [Inject] public void Construct(GameStarter gameStarter, Database database)
         {
             _gameStarter = gameStarter;
@@ -34,6 +35,7 @@ namespace StarProject
         private void InitPlayers()
         {
             int count = _gameStarter.NetworkRunner.ActivePlayers.Count();
+            _playersInGameText.RPC_ShowPlayerConnection(count);
             SetPlayer();
 
             if (count == Constants.TestPlayersCount)
@@ -47,7 +49,6 @@ namespace StarProject
             IEnumerable<PlayerRef> player = Runner.ActivePlayers;
             PlayerRef playerRef1 = player.FirstOrDefault();
             _playerUserID.Set(playerRef1, _database.FirebaseUser.UserId);
-
             foreach (var userId in _playerUserID)
             {
                 _connectedPlayers.RPC_InitTemplate(userId.Value.ToString());

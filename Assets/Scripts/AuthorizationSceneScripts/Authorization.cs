@@ -12,6 +12,7 @@ namespace StarProject
         public Authorization()
         {
             _auth = FirebaseAuth.DefaultInstance;
+            
         }
         
         public async Task RegistrateUserAsync(string login, string password)
