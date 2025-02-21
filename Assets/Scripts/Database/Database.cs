@@ -23,7 +23,7 @@ namespace StarProject
                 .Child(key)
                 .SetValueAsync(data);
         }
-
+/*
         public async Task<string> GetPlayerData(string key)
         {
             var snapshot = await _databaseRef
@@ -42,7 +42,7 @@ namespace StarProject
                 return null;
             }
         }
-        
+        */
         public async Task<string> GetPlayerData(string key, string userId)
         {
             var snapshot = await _databaseRef

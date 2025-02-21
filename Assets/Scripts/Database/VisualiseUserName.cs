@@ -19,7 +19,7 @@ namespace StarProject
 
         public async void GetUserName()
         {
-            var userName = await _database.GetPlayerData(Constants.DatabaseUserNameKey);
+            var userName = await _database.GetPlayerData(Constants.DatabaseUserNameKey, _database.FirebaseUser.UserId);
             _text.text = userName;
         }
     }
