@@ -11,6 +11,7 @@ namespace StarProject
     public class LobbyConnection : NetworkBehaviour
     {
         [SerializeField] private PlayerInformationPanel _playerInformationPanel;
+        [SerializeField] private ConnectedPlayers _connectedPlayers;
         [Networked] private NetworkDictionary<PlayerRef, NetworkString<_32>> _playerUserID => default;
         [SerializeField] private AvatarSpriteSO _avatarSpriteSO;
         [SerializeField] private SceneIndexSO _sceneIndexSO;
@@ -37,7 +38,7 @@ namespace StarProject
 
             if (count == Constants.TestPlayersCount)
             {
-                ShowPlayerInformPanel();
+                //ShowPlayerInformPanel();
             }
         }
 
@@ -46,6 +47,11 @@ namespace StarProject
             IEnumerable<PlayerRef> player = Runner.ActivePlayers;
             PlayerRef playerRef1 = player.FirstOrDefault();
             _playerUserID.Set(playerRef1, _database.FirebaseUser.UserId);
+
+            foreach (var userId in _playerUserID)
+            {
+                _connectedPlayers.RPC_InitTemplate(userId.Value.ToString());
+            }
         }
 
         private async void ShowPlayerInformPanel()

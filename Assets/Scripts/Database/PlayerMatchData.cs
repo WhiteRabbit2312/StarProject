@@ -18,9 +18,9 @@ namespace StarProject
             _database = database;
             _damagePointsText = GetComponent<TMP_Text>();
         }
-        private void OnEnable()
+        private async void OnEnable()
         {
-            var damagePoints = _database.GetPlayerData(_key, _database.FirebaseUser.UserId);
+            var damagePoints = await _database.GetPlayerData(_key, _database.FirebaseUser.UserId);
             _damagePointsText.text = Convert.ToInt32(damagePoints).ToString();
         }
         
