@@ -997,7 +997,7 @@ MonoBehaviour:
   _playersInGameText: {fileID: 261212046}
   _avatarSpriteSO: {fileID: 11400000, guid: af3ba30d69bee674ebc28e43766cbd46, type: 2}
   _sceneIndexSO: {fileID: 11400000, guid: 102c9735235c355458a45cce07855645, type: 2}
-  _showPlayerTimer: 3
+  _showPlayerTimer: 0.5
 --- !u!4 &1597348458
 Transform:
   m_ObjectHideFlags: 0

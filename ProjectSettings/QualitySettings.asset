@@ -198,7 +198,7 @@ QualitySettings:
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 1
-    skinWeights: 255
+    skinWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
     antiAliasing: 0
@@ -220,16 +220,18 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: b2ddc126a7ce0dc4193beeef98c32714, type: 2}
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 2
-    Lumin: 5
     GameCoreScarlett: 5
     GameCoreXboxOne: 5
+    Lumin: 5
+    Nintendo 3DS: 5
     Nintendo Switch: 5
     PS4: 5
     PS5: 5
+    Server: 0
     Stadia: 5
     Standalone: 5
     WebGL: 3
