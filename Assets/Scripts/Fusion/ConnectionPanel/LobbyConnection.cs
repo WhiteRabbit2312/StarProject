@@ -38,7 +38,7 @@ namespace StarProject
             _playersInGameText.RPC_ShowPlayerConnection(count);
             SetPlayer();
 
-            if (count == 1)//Constants.TestPlayersCount)
+            if (count == Constants.TestPlayersCount)
             {
                 ShowPlayerInformPanel();
             }
