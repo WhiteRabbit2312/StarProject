@@ -6,51 +6,72 @@ using UnityEngine;
 
 namespace StarProject
 {
-    public class Database
+    public class Database : MonoBehaviour
     {
+        public event Action<PlayerDataModel> OnPlayerDataLoaded;
+        
         private DatabaseReference _databaseRef;
-        private FirebaseUser _firebaseUser;
-
-        public FirebaseUser FirebaseUser
-        {
-            get => _firebaseUser;
-        }
-
-        public Database()
+        private FirebaseAuth _auth;
+        private string _userId;
+        
+        private async void Awake()
         {
             _databaseRef = FirebaseDatabase.DefaultInstance.RootReference;
-            _firebaseUser = FirebaseAuth.DefaultInstance.CurrentUser;
-            FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
-        }
-
-        public void SetUserData<T>(string key, T data)
-        {
-            _databaseRef.Child(Constants.DatabaseUserKey)
-                .Child(_firebaseUser.UserId)
-                .Child(key)
-                .SetValueAsync(data);
-        }
-
-/*
-        public async Task<string> GetPlayerData(string key)
-        {
-            var snapshot = await _databaseRef
-                .Child(Constants.DatabaseUserKey)
-                .Child(_firebaseUser.UserId)
-                .Child(key)
-                .GetValueAsync();
-
-            if (snapshot.Exists)
+            _auth = FirebaseAuth.DefaultInstance;
+            
+            if (PlayerPrefs.HasKey(Constants.DatabaseUserKey))
             {
-                string data = snapshot.Value.ToString();
-                return data;
+                _userId = PlayerPrefs.GetString(Constants.DatabaseUserKey);
             }
             else
             {
-                return null;
+                string newId = System.Guid.NewGuid().ToString();
+                PlayerPrefs.SetString(Constants.DatabaseUserKey, newId);
+                _userId = newId;
+            }
+            await GetPlayerData();
+        }
+        
+        public async Task SetUserData(PlayerDataModel playerData)
+        {
+            if (string.IsNullOrEmpty(playerData.PlayerName))
+            {
+                Debug.LogError("[Firease Manager] Player Name is null or empty");
+                return;
+            }
+
+            string json = JsonUtility.ToJson(playerData);
+
+            await _databaseRef.Child("Players").Child(_auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
+        }
+
+        public async Task GetPlayerData()
+        {
+            var snapshot = await _databaseRef.Child("Players").Child(_auth.CurrentUser.UserId).GetValueAsync();
+
+            if (snapshot.Exists)
+            {
+                PlayerDataModel playerData = JsonUtility.FromJson<PlayerDataModel>(snapshot.GetRawJsonValue());
+                OnPlayerDataLoaded?.Invoke(playerData);
+            }
+            
+            else
+            {
+                Debug.LogError("[Firebase Manager] No player data found. Creating new player profile.");
+                PlayerDataModel newPlayerData = CreateNewPlayerData();
+                await SetUserData(newPlayerData);
+                OnPlayerDataLoaded?.Invoke(newPlayerData);
             }
         }
-        */
+        
+        private PlayerDataModel CreateNewPlayerData()
+        {
+            PlayerDataModel newPlayerData = new PlayerDataModel();
+            newPlayerData.PlayerName = "";
+            return newPlayerData;
+        }
+        
+        /*
         public async Task<string> GetPlayerData(string key, string userId)
         {
             try
@@ -77,7 +98,7 @@ namespace StarProject
             }
 
             return null;
-        }
+        }*/
     }
 }
 

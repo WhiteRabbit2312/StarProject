@@ -20,15 +20,13 @@ namespace StarProject
         }
         private async void OnEnable()
         {
-            var damagePoints = await _database.GetPlayerData(_key, _database.FirebaseUser.UserId);
-            _damagePointsText.text = Convert.ToInt32(damagePoints).ToString();
+            //var damagePoints = await _database.GetPlayerData(_key, _database.FirebaseUser.UserId);
+            //_damagePointsText.text = Convert.ToInt32(damagePoints).ToString();
         }
         
         public async void SaveMatchData(string key, int data)
         {
-            var result = await _database.GetPlayerData(key, _database.FirebaseUser.UserId);
-            int totalDamage = Convert.ToInt32(result) + data;
-            _database.SetUserData(Constants.DamageKey, totalDamage);
+           
         }
     }
 }
