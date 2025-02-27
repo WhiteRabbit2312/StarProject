@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6016eb875788b3c48a11b9ce33475fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerNamePrefab: {fileID: 8689543394065437205, guid: 55622f8c8787e6d40b98fc9e985ee880, type: 3}
+  _playerNamePrefab: {fileID: 8383445532129397637, guid: 55622f8c8787e6d40b98fc9e985ee880, type: 3}
   _redTeamButton: {fileID: 399328495}
   _blackTeamButton: {fileID: 1821077041}
   _redPivot: {fileID: 2045257508}
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

@@ -12,13 +12,15 @@ namespace StarProject
         [SerializeField] protected SceneIndexSO SceneIndex;
         protected CheckAuthorization CheckAuth;
         protected Authorization Auth;
+        protected Database Database;
         private Button _button;
 
         [Inject]
-        public void Construct(Authorization authorization, CheckAuthorization checkAuthorization)
+        public void Construct(Authorization authorization, CheckAuthorization checkAuthorization, Database database )
         {
             Auth = authorization;
             CheckAuth = checkAuthorization;
+            Database = database;
         }
         private void Awake()
         {

@@ -9,7 +9,7 @@ using Zenject;
 
 public class TeamManager : NetworkBehaviour
 {
-    [SerializeField] private NetworkObject _playerNamePrefab;
+    [SerializeField] private GameObject _playerNamePrefab;
     [SerializeField] private Button _redTeamButton; 
     [SerializeField] private Button _blackTeamButton;
     
@@ -24,8 +24,10 @@ public class TeamManager : NetworkBehaviour
         _playerData = playerData;
     }
     
-    [Networked] private NetworkDictionary<string, Team> Teams => default;
-    private List<NetworkObject> _spawnedPlayers = new List<NetworkObject>();
+    [Networked, OnChangedRender(nameof(UpdateTeams))] private NetworkDictionary<NetworkString<_32>, Team> _teams => default;
+
+
+    private List<GameObject> _spawnedPlayers = new();
 
     private void Awake()
     {
@@ -35,23 +37,38 @@ public class TeamManager : NetworkBehaviour
 
     public override void Spawned()
     {
-        if (Teams.ContainsKey(_playerData.PlayerDataModel.PlayerName)) 
-            return;
-        Teams.Add(_playerData.PlayerDataModel.PlayerName, Team.None);
-        DespawnPlayers();
-        SpawnPlayerNames();
+        RPC_AddName(_playerData.PlayerDataModel.PlayerName, Team.None);
+    }
+    
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void RPC_AddName(string playerName, Team team)
+    {
+        if (!_teams.ContainsKey(playerName))
+        {
+            _teams.Add(playerName, team);
+
+        }
     }
 
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void RPC_ChangeTeam(string playerName, Team team)
+    {
+        _teams.Set(playerName, team);
+    }
+
+    private void UpdateTeams()
+    {
+        SpawnPlayerNames();
+    }
     public void SelectTeam(Team team)
     {
-        Teams.Set(_playerData.PlayerDataModel.PlayerName, team);
-        DespawnPlayers();
-        SpawnPlayerNames();
+        RPC_ChangeTeam(_playerData.PlayerDataModel.PlayerName, team);
     }
 
     private void SpawnPlayerNames()
     {
-        foreach (var item in Teams)
+        DespawnPlayers();
+        foreach (var item in _teams)
         {
             Transform pivot;
             switch (item.Value)
@@ -60,21 +77,19 @@ public class TeamManager : NetworkBehaviour
                 case Team.Black: pivot = _blackPivot; break;
                 default: pivot = _nonePivot; break;
             }
-            NetworkObject playerName = Runner.Spawn(_playerNamePrefab, pivot.transform.position, Quaternion.identity);
+            GameObject playerName = Instantiate(_playerNamePrefab, pivot.transform.position, Quaternion.identity);
             playerName.transform.SetParent(pivot.transform);
-            playerName.GetComponent<TMP_Text>().text = _playerData.PlayerDataModel.PlayerName;
-            
+            playerName.GetComponent<TMP_Text>().text = item.Key.ToString();
+            Debug.LogWarning("playerName: " + _playerData.PlayerDataModel.PlayerName);
             _spawnedPlayers.Add(playerName);
         }
     }
-
+    
     private void DespawnPlayers()
     {
-        if(_spawnedPlayers.Count == 0) 
-            return;
         foreach (var player in _spawnedPlayers)
         {
-            Runner.Despawn(player);
+            Destroy(player.gameObject);
         }
     }
 }

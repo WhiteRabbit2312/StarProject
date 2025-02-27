@@ -14,22 +14,10 @@ namespace StarProject
         private FirebaseAuth _auth;
         private string _userId;
         
-        private async void Awake()
+        private void Awake()
         {
             _databaseRef = FirebaseDatabase.DefaultInstance.RootReference;
             _auth = FirebaseAuth.DefaultInstance;
-            
-            if (PlayerPrefs.HasKey(Constants.DatabaseUserKey))
-            {
-                _userId = PlayerPrefs.GetString(Constants.DatabaseUserKey);
-            }
-            else
-            {
-                string newId = System.Guid.NewGuid().ToString();
-                PlayerPrefs.SetString(Constants.DatabaseUserKey, newId);
-                _userId = newId;
-            }
-            await GetPlayerData();
         }
         
         public async Task SetUserData(PlayerDataModel playerData)
@@ -42,12 +30,12 @@ namespace StarProject
 
             string json = JsonUtility.ToJson(playerData);
 
-            await _databaseRef.Child("Players").Child(_auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
+            await _databaseRef.Child(Constants.DatabaseUserKey).Child(_auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
         }
 
         public async Task GetPlayerData()
         {
-            var snapshot = await _databaseRef.Child("Players").Child(_auth.CurrentUser.UserId).GetValueAsync();
+            var snapshot = await _databaseRef.Child(Constants.DatabaseUserKey).Child(_auth.CurrentUser.UserId).GetValueAsync();
 
             if (snapshot.Exists)
             {

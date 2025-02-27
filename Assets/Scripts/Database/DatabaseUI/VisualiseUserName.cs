@@ -24,6 +24,11 @@ namespace StarProject
 
         private void Start()
         {
+            if (_playerData == null)
+            {
+                Debug.LogError("player data is null");
+            }
+            
             if (_playerData.PlayerDataModel.PlayerName != null)
             {
                 _textName.text = _playerData.PlayerDataModel.PlayerName;
@@ -41,6 +46,7 @@ namespace StarProject
             _textName.text = _nameInputField.text;
             PlayerDataModel playerDataModel = new PlayerDataModel();
             playerDataModel.PlayerName = _nameInputField.text;
+            _playerData.PlayerDataLoaded(playerDataModel);/////////////TODO
             await _database.SetUserData(playerDataModel);
             _namePanel.SetActive(false);
         }

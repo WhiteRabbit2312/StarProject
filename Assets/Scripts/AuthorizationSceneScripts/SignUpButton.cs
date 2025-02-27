@@ -9,10 +9,10 @@ namespace StarProject
             SignUpButtonPressed();
             LoadMenuScene();
         }
-        
+
         private async void SignUpButtonPressed()
         {
-            if (CheckAuth.ValidateRegistration(InputData.Login.text, 
+            if (CheckAuth.ValidateRegistration(InputData.Login.text,
                     InputData.Password.text, InputData.ConfirmPassword.text))
             {
                 await Auth.RegistrateUserAsync(InputData.Login.text, InputData.Password.text).ContinueWith(task =>
@@ -21,6 +21,7 @@ namespace StarProject
                     {
                         Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
                     }
+
                     if (task.IsFaulted)
                     {
                         Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
@@ -32,7 +33,7 @@ namespace StarProject
                     }
 
                 });
-                
+                await Database.GetPlayerData();
             }
             else
             {

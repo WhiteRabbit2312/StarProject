@@ -28,6 +28,7 @@ namespace StarProject
                     Debug.Log("CreateUserWithEmailAndPasswordAsync completed successfully.");
                 }
             });
+            await Database.GetPlayerData();
         }
     }
 }
